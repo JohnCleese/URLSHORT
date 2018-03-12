@@ -8,9 +8,7 @@ def shortener(request):
         form = Adressform(request.POST)
         if form.is_valid():
             url_old = form.cleaned_data['url_old']
-            if New_adress.objects.filter(url_old=url_old).count() == 1:
-                pass
-            else:
+            if not New_adress.objects.filter(url_old=url_old).exists():
                 form.save()
             pk = New_adress.objects.get(url_old=url_old).pk
             context = {'url_old': url_old, 'pk': pk}
