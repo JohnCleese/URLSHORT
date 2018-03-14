@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import New_adress
+from .models import NewAdress
 from .form import Adressform
 
 
@@ -7,11 +7,11 @@ def shortener(request):
     if request.method == 'POST':
         form = Adressform(request.POST)
         if form.is_valid():
-            url_old = form.cleaned_data['url_old']
-            if not New_adress.objects.filter(url_old=url_old).exists():
+            main_url = form.cleaned_data['main_url']
+            if not NewAdress.objects.filter(main_url=main_url).exists():
                 form.save()
-            pk = New_adress.objects.get(url_old=url_old).pk
-            context = {'url_old': url_old, 'pk': pk}
+            pk = NewAdress.objects.get(main_url=main_url).pk
+            context = {'main_url': main_url, 'pk': pk}
             return render(request, 'Shortener/Display.html', context)
     else:
         form = Adressform()
@@ -22,7 +22,7 @@ def display_urls(request):
     return render(request, 'Shortener/Display.html')
 
 def redirecturl(request, pk):
-    link = New_adress.objects.get(pk=pk).url_old
+    link = NewAdress.objects.get(pk=pk).main_url
     contect = {'link': link}
     return render(request, 'Shortener/Destination.html', contect)
 

@@ -1,9 +1,9 @@
 from django import forms
-from .models import New_adress
+from .models import NewAdress
 
 
 class Adressform(forms.ModelForm):
     class Meta:
-        model = New_adress
-        fields = ('url_old',)
-        labels = {'url_old': "old adress"}
+        model = NewAdress
+        fields = ('main_url',)
+        labels = {'main_url': "old adress"}

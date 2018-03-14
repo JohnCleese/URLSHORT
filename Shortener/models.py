@@ -1,7 +1,5 @@
 from django.db import models
 
 
-class New_adress(models.Model):
-    url_old = models.CharField(max_length=1000)
-
-
+class NewAdress(models.Model):
+    main_url = models.CharField(max_length=1000)
